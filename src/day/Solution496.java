@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * 2021/10/26
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class Solution496 {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {

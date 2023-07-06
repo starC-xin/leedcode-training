@@ -23,7 +23,7 @@ package day;
  *
  * 预期：[null,null,null,true,true,true,false,true,false,true,true]
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class WordDictionary {
     public static void main(String[] args){

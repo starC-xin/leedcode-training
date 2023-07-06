@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 2022/3/10
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class Node {
     public int val;

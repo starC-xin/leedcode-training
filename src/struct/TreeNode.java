@@ -3,7 +3,7 @@ package struct;
 /**
  * 2021/10/19
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class TreeNode {
     public int val;

@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  * 2022/3/2
  * 力扣工具类
  * 输入参数转换
- * @author ZhaoXin
+ * @author x.c
  */
 public class Common {
 

@@ -3,7 +3,7 @@ package struct;
 /**
  * 2021/11/2
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class ListNode {
     public int val;

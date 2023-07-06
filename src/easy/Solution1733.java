@@ -49,7 +49,7 @@ import struct.TreeNode;
  *
  * false
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class Solution1733 {
     public static void main(String[] args){

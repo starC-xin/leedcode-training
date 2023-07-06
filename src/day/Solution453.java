@@ -99,7 +99,7 @@ package day;
  *
  * [7,7,7,7]：其余数都在追赶你索引为3的数，最小数从6增加为了7。
  *
- * @author ZhaoXin
+ * @author x.c
  */
 public class Solution453 {
 
