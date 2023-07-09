@@ -119,25 +119,48 @@ public class Solution {
     /**
      * TODO 从头部或尾部选择 k 区间逐个递减
      *      也没过，看看别人的参考
+     * TODO 过了，模拟大法好，但是耗时严重
      */
     public boolean checkArray0(int[] nums, int k) {
-        for (int i = 0; i < nums.length - k; i++) {
+        for (int i = 0; i <= nums.length - k; i++) {
             if(nums[i] == 0){
                 continue;
             }
             int tmp = nums[i];
-            for (int j = i; j < i + k; j++) {
+            for (int j = i; j < i + k && j < nums.length; j++) {
+                nums[j] -= tmp;
                 if(nums[j] < 0){
                     return false;
                 }
-                nums[j] -= tmp;
             }
         }
-//        check
-        for (int num : nums) {
-            if(num != 0){
+//        倒序检查会更好
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if(nums[i] > 0){
                 return false;
             }
+        }
+        return true;
+    }
+
+    /**
+     * 尝试差分解决
+     * 虽然对差分的概念依然很模糊，但带来的效率提升确实恐怖
+     */
+    public boolean checkArray1(int[] nums, int k) {
+        int[] d = new int[nums.length + 1];
+        int sumD = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sumD += d[i];
+            nums[i] += sumD;
+            if(nums[i] == 0){
+                continue;
+            }
+            if(nums[i] < 0 || i + k > nums.length){
+                return false;
+            }
+            sumD -= nums[i];
+            d[i + k] += nums[i];
         }
         return true;
     }
@@ -166,6 +189,13 @@ public class Solution {
 //        System.out.println(demo.maxNonDecreasingLength(Common.string2IntArr("[2,3,1]"), Common.string2IntArr("[1,2,1]")));
 
 //        case 432
-        System.out.println(demo.checkArray0(Common.string2IntArr("[0,45,82,98,99]"), 4));
+//        System.out.println(demo.checkArray0(Common.string2IntArr("[0,45,82,98,99]"), 4));
+
+//        System.out.println(demo.checkArray0(Common.string2IntArr("[60,72,87,89,63,52,64,62,31,37,57,83,98,94,92,77,94,91,87,100,91,91,50,26]"), 4));
+//        System.out.println(demo.checkArray0(Common.string2IntArr("[0,16,0,29,0,0,0,9,0,0,0,0,0,0,0,0,0,95,49,0,0,0,0,68]"), 24));
+        System.out.println(demo.checkArray1(Common.string2IntArr("[60,72,87,89,63,52,64,62,31,37,57,83,98,94,92,77,94,91,87,100,91,91,50,26]"), 4));
+
+        final Solution4 demo4 = new Solution4();
+//        System.out.println(demo4.checkArray(Common.string2IntArr("[60,72,87,89,63,52,64,62,31,37,57,83,98,94,92,77,94,91,87,100,91,91,50,26]"), 4));
     }
 }
