@@ -61,6 +61,31 @@ public class Solution {
     }
 
     /**
+     * 是我最喜欢的 a神 的提交
+     * 留作第三题的参考
+     */
+    static class Solution3 {
+
+        public int minimumBeautifulSubstrings(String s) {
+            return minimumBeautifulSubstrings(0, s);
+        }
+
+        private int minimumBeautifulSubstrings(int index, String s) {
+            if (index == s.length()) {
+                return 0;
+            }
+            int min = Integer.MAX_VALUE;
+            for (int i = index + 1, j, k; i <= s.length(); i++) {
+                if (s.charAt(index) == '1' && (j = Integer.parseInt(s.substring(index, i), 2)) > 0 && 15625 % j == 0
+                        && (k = minimumBeautifulSubstrings(i, s)) >= 0) {
+                    min = Math.min(min, 1 + k);
+                }
+            }
+            return min == Integer.MAX_VALUE ? -1 : min;
+        }
+    }
+
+    /**
      * TODO 可惜了，最后这题很简单
      *      但是没有考虑到内存优化，导致内存超出限制
      *      改写为稀疏图后，没能在结束前提交
@@ -124,6 +149,30 @@ public class Solution {
             }
         }
         return count;
+    }
+
+    /**
+     * 第四题参考
+     */
+    static class Solution4 {
+
+        public long[] countBlackBlocks(int m, int n, int[][] coordinates) {
+            HashMap<List<Integer>, Integer> map = new HashMap<>();
+            long[] result = { (m - 1L) * (n - 1), 0, 0, 0, 0 };
+            for (int[] c : coordinates) {
+                for (int[] i : new int[][] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } }) {
+                    if (c[0] + i[0] >= 0 && c[0] + i[0] < m && c[1] + i[1] >= 0 && c[1] + i[1] < n) {
+                        int count = map.getOrDefault(List.of(c[0], c[1] + i[1]), 0)
+                                + map.getOrDefault(List.of(c[0] + i[0], c[1]), 0)
+                                + map.getOrDefault(List.of(c[0] + i[0], c[1] + i[1]), 0);
+                        result[count]--;
+                        result[count + 1]++;
+                    }
+                }
+                map.put(List.of(c[0], c[1]), 1);
+            }
+            return result;
+        }
     }
 
     public static void main(String[] args) {
