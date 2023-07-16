@@ -43,6 +43,58 @@ public class Solution {
     }
 
     /**
+     * 在 a 佬基础上修改得到的
+     */
+    public int maximumBeauty0(int[] nums, int k) {
+        Arrays.sort(nums);
+        int max = 0;
+        Integer pre = null;
+        for (int i = 0, j = 0; i < nums.length; i++) {
+            if(pre != null && pre == nums[i]){
+                continue;
+            }
+            for (; j < nums.length && nums[j] - nums[i] <= 2 * k; j++) {
+            }
+            max = Math.max(max, j - i);
+            pre = nums[i];
+        }
+        return max;
+    }
+
+    /**
+     * 啊？
+     * 说实话，a佬这一上来就排序，我真没看懂
+     * 排序后违背了原数组不可变的要求吧，怎么能在排序后依然得到正确答案的呢
+     * 然后内循环应该关键点，虽然看懂了是怎么回事，但看不懂思路
+     * TODO 好像明白了
+     *      是我读题有问题，要求是取得出现频率最高的
+     *      修改要求是 nums[i] 可以修改为 [nums[i] - k, nums[i] + k] 中的任意值
+     *      即，修改前后与原数组顺序无关
+     *      排序后即可找到词频最高的
+     *      并以此为基础，对其前后可修改范围的数值也尝试加载到该基数上
+     *      即可得到最大返回值
+     *      a佬的代码在此基础上设计了一个类似滚动数组的动规逻辑
+     *      转换方程大致可以表示为 f(max)=Max(len(i), len(i + 1))，
+     *          其中 len(i)=count(i, i + k)，
+     *          且 i+k 满足 nums[i+k]-nums[i]<=k*2
+     *      既然如此，那就还有优化余地，直接越过相同元素的计算
+     *      因为第一遍历到该元素时，一定就是本元素能取得的最大值，再次遍历到该元素时，一定小于第一次遍历
+     *      调整后的代码见 {@link #maximumBeauty0(int[], int)}
+     */
+    static class Solution2 {
+        public int maximumBeauty(int[] nums, int k) {
+            Arrays.sort(nums);
+            int max = 0;
+            for (int i = 0, j = 0; i < nums.length; i++) {
+                for (; j < nums.length && nums[j] - nums[i] <= 2 * k; j++) {
+                }
+                max = Math.max(max, j - i);
+            }
+            return max;
+        }
+    }
+
+    /**
      * TODO 找出频率最高的元素
      *      此题要结合前缀和思路
      *      卡在 case 912 超时了，一共 915 个 case
@@ -134,6 +186,26 @@ public class Solution {
      */
     public int longestValidSubstring(String word, List<String> forbidden) {
         return 0;
+    }
+
+    /**
+     * 这个是真没看懂
+     */
+    static class Solution4 {
+        public int longestValidSubstring(String word, List<String> forbidden) {
+            int max = 0;
+            HashSet<String> set = new HashSet<>(forbidden);
+            for (int i = 0, j = 0, k; i < word.length(); max = Math.max(max, j - i++)) {
+                for (; j < word.length(); j++) {
+                    for (k = Math.max(i, j - 9); k <= j && !set.contains(word.substring(k, j + 1)); k++) {
+                    }
+                    if (k <= j) {
+                        break;
+                    }
+                }
+            }
+            return max;
+        }
     }
 
     public static void main(String[] args) {

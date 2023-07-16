@@ -91,6 +91,18 @@ public class Common {
     }
 
     /**
+     * 字符串转 List
+     */
+    public static List<Integer> string2IntList(String str) {
+        final String[] split = processStr(str).split(",");
+        final ArrayList<Integer> result = new ArrayList<>();
+        for (String s : split) {
+            result.add(Integer.parseInt(s));
+        }
+        return result;
+    }
+
+    /**
      * 字符串预处理
      */
     private static String processStr(String str){
