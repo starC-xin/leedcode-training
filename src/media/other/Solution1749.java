@@ -9,7 +9,8 @@ import java.util.Arrays;
  */
 public class Solution1749 {
     /**
-     * 说实话，动规方便的提，一遇到就拉胯
+     * 说实话，动规方便的题，一遇到就拉胯
+     * 这是是在想不出来的情况下，看了下灵神的题解后写出来的
      */
     public int maxAbsoluteSum(int[] nums) {
         int ans = 0;
